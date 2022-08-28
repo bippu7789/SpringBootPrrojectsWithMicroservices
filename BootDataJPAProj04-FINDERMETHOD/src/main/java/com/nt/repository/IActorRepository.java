@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nt.entity.Actor;
+import com.nt.entity.ResultView;
 
 public interface IActorRepository extends JpaRepository<Actor, Integer> {
 	// Select *from data jpa actor where aname=?
@@ -36,7 +37,16 @@ public interface IActorRepository extends JpaRepository<Actor, Integer> {
 
 	// select *from data_jpa_actor where statusIsEqual=1 and category=?
 	public Iterable<Actor> findByStatusTrueOrCategoryEquals(String ccategory);
-    // select *from data_jpa_actor (aid>? and aid<?) or (uppercategories) not in ???
+
+	// select *from data_jpa_actor (aid>? and aid<?) or (uppercategories) not in ???
 	public Iterable<Actor> findByAidGreaterThanAndAidLessThanOrCategoryNotInIgnoreCase(int start, int end,
 			String... categories);
+
+	// Select Aid,aname from data_jpa_actor
+	public Iterable<ResultView> findByCategoryEqualsIgnoreCase(String category);
+
+	public ResultView findByMobileNo(long mobileNumber);
+
+	public Actor findByMobileNoIs(long mobileNumber);
+
 }

@@ -1,9 +1,13 @@
 package com.nt.runners;
 
+import javax.swing.text.View;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.nt.entity.Actor;
+import com.nt.entity.ResultView;
 import com.nt.repository.IActorRepository;
 
 @Component
@@ -47,8 +51,22 @@ public class FinderMethodsTestRunners implements CommandLineRunner {
 //		System.out.println("=========findByStatusTrueOrCategoryEquals=========");
 //		actorRepo.findByStatusTrueOrCategoryEquals("Teja").forEach(System.out::println);
 
-		System.out.println("==========findByAidGreaterThanAndAidLessThanOrCategoryNotInIgnoreCase=======");
-		actorRepo.findByAidGreaterThanAndAidLessThanOrCategoryNotInIgnoreCase(3, 6, "ASE").forEach(System.out::println);
+//		System.out.println("==========findByAidGreaterThanAndAidLessThanOrCategoryNotInIgnoreCase=======");
+//		actorRepo.findByAidGreaterThanAndAidLessThanOrCategoryNotInIgnoreCase(3, 6, "ASE").forEach(System.out::println);
+
+		Iterable<ResultView> it = actorRepo.findByCategoryEqualsIgnoreCase("ASE");
+		it.forEach(view -> {
+			System.out.println(view.getClass());
+			System.out.println(view.getAid() + "" + view.getAname());
+
+		});
+		System.out.println("Repository object class name::" + actorRepo.getClass());
+		ResultView view = actorRepo.findByMobileNo(9695573777L);
+		System.out.println("Aid::" + view.getAid() + "Aname::" + view.getAname());
+
+		System.out.println("============***********===============");
+		Actor actor = actorRepo.findByMobileNoIs(9695573777L);
+		System.out.println("Actor details is::" + actor);
 	}
 
 }
