@@ -59,6 +59,7 @@ public class VoterEligibilityCheckingService {
 		} else {
 			return "Mr./Mrs." + name + "You are eligible for voting";
 		}
+		
 	}
 
 }
